@@ -23,7 +23,7 @@
 			}
 			//TODA LA EJECUCION DESPUES DE LA PRIMERA RECARGA DE LA PAGINA.
 			if((isset($_SESSION['resRecurso'])) && (isset($_REQUEST['data_ini']))){
-				$conn=mysqli_connect('localhost','root','','bd_intranet');
+				$conn=mysqli_connect('mysql.hostinger.es','u467566146_admin','1234567890','u467566146_intra');
 				$sql_compro="SELECT hours.*, registers.*, users.*, resources.*, estadoinfo.*, resourcestype.* FROM (((((resourcestype INNER JOIN resources ON resourcestype.idRType=resources.idRType) INNER JOIN estadoinfo ON resources.idEstado=estadoinfo.idEstado) INNER JOIN registers ON registers.idResource=resources.idResource) INNER JOIN users ON users.idUser=registers.idUser) INNER JOIN hours ON hours.idFranja=registers.idFranja) 
 				WHERE registers.idResource='$_SESSION[resRecurso]' && registers.data_ini='$_REQUEST[data_ini]' && registers.data_fin='$_REQUEST[data_ini]' && registers.idFranja='$_REQUEST[franjahoraria]'";
 				$datos=mysqli_query($conn,$sql_compro);
@@ -36,7 +36,7 @@
 				    </script>';
 				}else{
 					//Si es cero tiene que ejecutarse el INSERT
-					$conn=mysqli_connect('localhost','root','','bd_intranet');
+					$conn=mysqli_connect('mysql.hostinger.es','u467566146_admin','1234567890','u467566146_intra');
 					$sql_intro="INSERT INTO registers (idRegister, data_ini, data_fin, idResource, idUser, idFranja) VALUES (NULL, '$_REQUEST[data_ini]', '$_REQUEST[data_ini]', '$_SESSION[resRecurso]', '$user', $_REQUEST[franjahoraria])";
 					//"SELECT hours.*, registers.*, users.*, resources.*, estadoinfo.*, resourcestype.* FROM (((((resourcestype INNER JOIN resources ON resourcestype.idRType=resources.idRType) INNER JOIN estadoinfo ON resources.idEstado=estadoinfo.idEstado) INNER JOIN registers ON registers.idResource=resources.idResource) INNER JOIN users ON users.idUser=registers.idUser) INNER JOIN hours ON hours.idFranja=registers.idFranja) WHERE registers.idResource=$_SESSION[resRecurso] && registers.data_ini=$_REQUEST[data_ini] && registers.data_fin=$_REQUEST[data_ini] && registers.idFranja=$_REQUEST[franjahoraria]";
 					$datos=mysqli_query($conn,$sql_intro);
@@ -65,7 +65,7 @@
 							echo "<a href=paginausuario_reservar.php>Volver</a>";
 						}else{
 							$id=$_REQUEST['idresource'];
-							$conn=mysqli_connect('localhost','root','','bd_intranet');
+							$conn=mysqli_connect('mysql.hostinger.es','u467566146_admin','1234567890','u467566146_intra');
 							$sql="SELECT resources.*, resourcestype.*, estadoinfo.* FROM ((resourcestype INNER JOIN resources ON resourcestype.idRType=resources.idRType) INNER JOIN estadoinfo ON resources.idEstado=estadoinfo.idEstado) WHERE resources.idResource=".$id;
 							$datos=mysqli_query($conn,$sql);
 							while($valor=mysqli_fetch_array($datos)){
@@ -84,7 +84,7 @@
 				<br><input type="date" name="data_ini" min="<?php echo date("Y-m-d");?>"value="<?php echo date("Y-m-d");?>" required><br><br>
 				<select name="franjahoraria">
 					<?php
-					$conn=mysqli_connect('localhost','root','','bd_intranet');
+					$conn=mysqli_connect('mysql.hostinger.es','u467566146_admin','1234567890','u467566146_intra');
 					$sql="SELECT * FROM hours";
 					$datos=mysqli_query($conn,$sql);
 					while($nom=mysqli_fetch_array($datos)){

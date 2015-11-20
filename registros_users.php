@@ -16,7 +16,7 @@
 				document.location=("paginausuario_reservar.php");
 				</script>';
 			}else if(!empty($_SESSION['admin'])){
-				$con = mysqli_connect('localhost','root','','bd_intranet');
+				$con = mysqli_connect('mysql.hostinger.es','u467566146_admin','1234567890','u467566146_intra');
 				$privilegios=$_SESSION['admin'];
 		?>
 				<div>

@@ -7,7 +7,7 @@
 	<body>
 		<?php
 			//realizamos la conexión con mysql
-			$con = mysqli_connect('localhost', 'root', '', 'bd_intranet');
+			$con = mysqli_connect('mysql.hostinger.es','u467566146_admin','1234567890','u467566146_intra');
 			$sql = "UPDATE users SET nomUser='$_REQUEST[nomUser]', mail='$_REQUEST[mail]', telf='$_REQUEST[telf]', password='$_REQUEST[newpassword]', privilegios='$_REQUEST[privi]' WHERE idUser='$_REQUEST[id]'";
 
 			//echo $sql;

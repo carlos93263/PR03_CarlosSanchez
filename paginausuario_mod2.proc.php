@@ -6,7 +6,7 @@
 	</head>
 	<body>
 		<?php
-			$con = mysqli_connect('localhost','root','','bd_intranet');
+			$con = mysqli_connect('mysql.hostinger.es','u467566146_admin','1234567890','u467566146_intra');
 			$sql = "SELECT * FROM users WHERE idUser=".$_REQUEST['id'];
 			$datos = mysqli_query($con, $sql);
 

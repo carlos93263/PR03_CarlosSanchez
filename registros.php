@@ -5,8 +5,8 @@
 //Iniciamos la sesión
 
 		
-$con = mysqli_connect('localhost','root','','bd_intranet');
-$sql = "SELECT users.*,resources.*,resourcestype.*,registers.*,estadoinfo.* FROM ((((resourcestype INNER JOIN resources ON resourcestype.idRType=resources.idRType) INNER JOIN registers ON resources.idResource=registers.idResource) INNER JOIN users ON users.idUser=registers.idUser) INNER JOIN estadoinfo ON resources.idEstado=estadoinfo.idEstado)";
+$con = mysqli_connect('mysql.hostinger.es','u467566146_admin','1234567890','u467566146_intra');
+$sql = "SELECT users.*,resources.*,resourcestype.*,registers.*,estadoinfo.*, hours.* FROM (((((resourcestype INNER JOIN resources ON resourcestype.idRType=resources.idRType) INNER JOIN registers ON resources.idResource=registers.idResource) INNER JOIN users ON users.idUser=registers.idUser) INNER JOIN estadoinfo ON resources.idEstado=estadoinfo.idEstado) INNER JOIN hours ON hours.idFranja=registers.idFranja)";
 
 if(!empty($_SESSION['usuario'])){		//Aqui introducimos lo que puede ver un usuario con una cuentra normal
 	$privilegios=$_SESSION['usuario'];	//Guardamos la variable usuario en $privilegios para que no haya diferencias entre usuario y administrador en el resto del codigo
@@ -22,6 +22,7 @@ if(!empty($_SESSION['usuario'])){		//Aqui introducimos lo que puede ver un usuar
 		<th>Recurso</th>
 		<th>Fecha inicio</th>
 		<th>Fecha fin</th>
+		<th>Franja horaria</th>
 	</tr>
 	<?php
 		$datos=mysqli_query($con,$sql);
@@ -35,6 +36,7 @@ if(!empty($_SESSION['usuario'])){		//Aqui introducimos lo que puede ver un usuar
 			}else{
 				echo "<td>En uso</td>";
 			}
+			echo "<td>".$valor['franja']."</td>";
 		    echo "</tr>";
 		}
 	echo "</table>";
@@ -53,6 +55,7 @@ if(!empty($_SESSION['usuario'])){		//Aqui introducimos lo que puede ver un usuar
 		<th>Recurso</th>
 		<th>Fecha inicio</th>
 		<th>Fecha fin</th>
+		<th>Franja horaria</th>
 	</tr>
 	<?php
 		$sql.=" WHERE nomUser='$privilegios'";		//mostramos las reservas del usuario logeado
@@ -66,6 +69,7 @@ if(!empty($_SESSION['usuario'])){		//Aqui introducimos lo que puede ver un usuar
 					}else{
 						echo "<td>En uso</td>";			//Texto a mostrar en caso de que no se haya devuelto
 					}
+					echo "<td>".$valor['franja']."</td>";
 		   			echo "</tr>";
 				}
 		echo "</table>";

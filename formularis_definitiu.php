@@ -24,7 +24,7 @@
 				if (!isset($_REQUEST['tiporecursos'])){
 					//EN EL CASO DE QUE NO EXISTA, EJECUTA EL SIGUIENTE CODIGO.
 					//Conexion a la BBDD.
-					$conn=mysqli_connect('localhost','root','','bd_intranet');
+					$conn=mysqli_connect('mysql.hostinger.es','u467566146_admin','1234567890','u467566146_intra');
 					//Almacenar la consulta SQL en una variable.
 	                $consulta_Rtype="SELECT idRType, tipo FROM resourcestype";
 	                //Almacenar resultado de consulta en un Array.
@@ -45,7 +45,7 @@
 			    <?php
 	            }else{
 	            	//EN EL CASO DE QUE SI EXISTA EJECUTA EL SIGUIENTE CODIGO.
-	            	$conn=mysqli_connect('localhost','root','','bd_intranet');
+	            	$conn=mysqli_connect('mysql.hostinger.es','u467566146_admin','1234567890','u467566146_intra');
 	            	$consulta_Rtype="SELECT idRType, tipo FROM resourcestype";
 					$datos=mysqli_query($conn,$consulta_Rtype);
 		        ?>
@@ -80,7 +80,7 @@
         		</tr>
 		        	<?php
 		        		if ((!isset($_REQUEST['tiporecursos'])) OR ($_REQUEST['tiporecursos']==12)){
-			        		$conn=mysqli_connect('localhost','root','','bd_intranet');
+			        		$conn=mysqli_connect('mysql.hostinger.es','u467566146_admin','1234567890','u467566146_intra');
 					        $sql="SELECT resources.*, resourcestype.*, estadoinfo.* FROM ((resourcestype INNER JOIN resources ON resourcestype.idRType=resources.idRType) INNER JOIN estadoinfo ON resources.idEstado=estadoinfo.idEstado)";
 					       	$datos=mysqli_query($conn,$sql);
 					        $num_filas = mysqli_num_rows($datos);
@@ -100,7 +100,7 @@
 								echo "</tr>";
 							}
 						} else {
-							$conn=mysqli_connect('localhost','root','','bd_intranet');
+							$conn=mysqli_connect('mysql.hostinger.es','u467566146_admin','1234567890','u467566146_intra');
 							$sql="SELECT resources.*, resourcestype.*, estadoinfo.* FROM ((resourcestype INNER JOIN resources ON resourcestype.idRType=resources.idRType) INNER JOIN estadoinfo ON resources.idEstado=estadoinfo.idEstado)";
 					        $sql.=" WHERE";
 					        $sql.=" resources.idRType=$_REQUEST[tiporecursos]";

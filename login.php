@@ -6,7 +6,7 @@ $con = mysqli_connect($host, $usuari, $clau, $bd);
 **y los almacenamos en variables.*/
 $usuario = $_REQUEST["user"];   
 $password = $_REQUEST["pass"];
-$con = mysqli_connect('localhost','root','','bd_intranet');
+$con = mysqli_connect('mysql.hostinger.es','u467566146_admin','1234567890','u467566146_intra');
 //Consulta de mysql con la que indicamos que necesitamos que seleccione
 $result = mysqli_query($con, "SELECT * FROM users WHERE nomUser = '$usuario'");
 //Validamos si el nombre del usuario existe en la base de datos o es correcto

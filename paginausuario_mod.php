@@ -42,8 +42,8 @@
 			<div id='cssmenu'>
 				<ul>
 		   			<li><a href='paginausuario_reservar.php'><span>Reservar</span></a></li>
-		   			<li><a href='paginausuario_historial.php'><span>Historial</span></a></li>
-		   			<li class='active'><a href='#'><span>Administración<span></a></li>
+		   			<li class="despues"><a href='paginausuario_historial.php'><span>Historial</span></a></li>
+		   			<li class='active'><a href='#'><span>Modificar<span></a></li>
 				</ul>
 			</div>  
 		<div class="contenido">

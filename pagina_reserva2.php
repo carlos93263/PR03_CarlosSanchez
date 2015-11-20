@@ -21,20 +21,13 @@
 				<p>No estas logueado</p>
 				<?php
 			}
-
 			//TODA LA EJECUCION DESPUES DE LA PRIMERA RECARGA DE LA PAGINA.
-			if(isset($_SESSION['resRecurso'])){
-				//echo $_SESSION['resRecurso'];
-				//echo "<br>";
-				//echo $_REQUEST['data_ini'];
-				//echo "<br>";
-				//echo $_REQUEST['franjahoraria'];
+			if((isset($_SESSION['resRecurso'])) && (isset($_REQUEST['data_ini']))){
 				$conn=mysqli_connect('localhost','root','','bd_intranet');
 				$sql_compro="SELECT hours.*, registers.*, users.*, resources.*, estadoinfo.*, resourcestype.* FROM (((((resourcestype INNER JOIN resources ON resourcestype.idRType=resources.idRType) INNER JOIN estadoinfo ON resources.idEstado=estadoinfo.idEstado) INNER JOIN registers ON registers.idResource=resources.idResource) INNER JOIN users ON users.idUser=registers.idUser) INNER JOIN hours ON hours.idFranja=registers.idFranja) 
 				WHERE registers.idResource='$_SESSION[resRecurso]' && registers.data_ini='$_REQUEST[data_ini]' && registers.data_fin='$_REQUEST[data_ini]' && registers.idFranja='$_REQUEST[franjahoraria]'";
 				$datos=mysqli_query($conn,$sql_compro);
 				$num_filas = mysqli_num_rows($datos);
-				echo $num_filas;
 				if ($num_filas!=0){
 					unset($_SESSION['resRecurso']);
 					echo'<script language="javascript">
@@ -53,22 +46,6 @@
 						alert("Tu reserva se ha confirmado");
 					  </script>';
 				}
-				
-				
-
-				/**$hoy = date("Y-m-d");
-				$conn=mysqli_connect('localhost','root','','bd_intranet');
-				$sql_i="INSERT INTO registers (idRegister, data_ini, data_fin, idResource, idUser) VALUES (NULL, '$hoy', NULL, '$_SESSION[resRecurso]', '$user')";
-				$datos=mysqli_query($conn,$sql);
-				$datos2=mysqli_query($conn,$sql_i);
-				unset($_SESSION['resRecurso']);
-				echo '<script language="javascript">
-					alert("Tu reserva se ha confirmado");
-					document.location=("paginausuario_reservar.php");
-					</script>'; 
-				**/
-
-
 			}else{
 		?>	
 		<!-- TODO LO REFERENTE A LOS FORMULARIOS DE SELECCION DE DIA I HORA. -->
@@ -118,7 +95,6 @@
 				<br><br><br><input type='submit' value='Reservar' name='reservar'>
 			</form>
 		<?php
-			
 			}
 		?>
 	</body>

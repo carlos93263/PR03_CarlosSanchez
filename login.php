@@ -13,7 +13,7 @@ $result = mysqli_query($con, "SELECT * FROM users WHERE nomUser = '$usuario'");
 if($row = mysqli_fetch_array($result))
 {     
 //Si el usuario es correcto ahora validamos su contraseña
-	if($row["password"] == $password){
+	if($row["password"] == $password && $row["estat"]!=0){
 	  	//Creamos sesión
 	  	session_start();  
 	  	if($row['privilegios']=="member"){
@@ -34,7 +34,7 @@ if($row = mysqli_fetch_array($result))
 	}else{
   	//En caso que la contraseña sea incorrecta enviamos un msj y redireccionamos a login.php
  	echo '<script language="javascript">
-		alert("Contraseña incorrecta");
+		alert("Tu contraseña no es correcta o tu usuario ha sido deshabilitado.");
 		document.location=("index.html");
 		</script>';
 	}

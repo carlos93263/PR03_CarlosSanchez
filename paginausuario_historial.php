@@ -43,6 +43,7 @@ if(!empty($_SESSION['usuario'])){		//Aqui introducimos lo que puede ver un usuar
 				<ul>
    					<li><a href='paginausuario_reservar.php'><span>Reservar</span></a></li>
 	   				<li class='active'><a href='#'><span>Historial</span></a></li>
+	   				<li><a href='paginausuario_mod.php'><span>Modificar</span></a></li>
 	   			</ul>
 			</div>  
 		<div class="contenido">

@@ -20,15 +20,15 @@
 				$privilegios=$_SESSION['admin'];
 		?>
 				<div>
-					<form name="formulario_users" action="paginausuario_mod.php" method="POST">
+					<form name="formulario_users" action="paginausuario_mod.php" method="GET">
 						<select name="tipo_user">
 							<option value="todos" selected>Todos</option>
 							<option value="admin">Administradores</option>
 							<option value="member">Miembros</option>
 						</select>
+						<input type="submit"><br><br>
 					</form>
-					<input type="submit">
-
+					
 				<!-- TODO LO REFERENTE A MOSTRAR CONSULTA. -->
 				<div>
 					<h3>USUARIOS</h3>
@@ -39,10 +39,16 @@
 							<th>Telefono:</th>
 							<th>Contraseña:</th>
 							<th>Tipo de usuario:</th>
+							<th>Estado:</th>
+							<th>Modificar:</th>
+
 						</tr>
 						<?php
-						$sql = "SELECT * FROM users WHERE users.privilegios=$_REQUEST[tipo_user]";
-						$datos=mysqli_query($con,$sql);
+						if ((!isset($_REQUEST['tipo_user'])) OR ($_REQUEST['tipo_user']=='todos')){
+							$sql = "SELECT * FROM users";
+						}else{
+							$sql = "SELECT * FROM users WHERE users.privilegios='$_REQUEST[tipo_user]'";
+						}
 						$datos=mysqli_query($con,$sql);
 				        while($valor=mysqli_fetch_array($datos)){
 						    echo "<tr>";
@@ -51,10 +57,18 @@
 						    echo "<td>".$valor['telf']."</td>";
 						    echo "<td>".$valor['password']."</td>";
 							echo "<td>".$valor['privilegios']."</td>";
+							if ($valor['estat']==0){
+								echo "<td><a href=paginausuario_mod2.proc.php?id=".$valor['idUser'].">Habilitar</a></td>";
+							}else{
+								echo "<td><a href=paginausuario_mod2.proc.php?id=".$valor['idUser'].">Deshabilitar</a></td>";
+							}
+							echo "<td><a href=paginausuario_mod3.php?id=".$valor['idUser'].">Modificar</a></td>";
+							
 						    echo "</tr>";
 						}
 						?>
-					</table>
+					</table><br><br>
+					<a href=paginausuario_mod_crearusu.php> CREAR UN NUEVO USUARIO</a>
 				</div>
 			<?php		
 			} else {
